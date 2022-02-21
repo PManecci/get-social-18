@@ -1,5 +1,4 @@
  const { Schema, model } = require('mongoose');
- const dateFormat = require('../utils/dateFormat');
 
  const UserSchema = new Schema({
      username: {
@@ -14,12 +13,7 @@
         unique: true,
         match: /.+\@.+\..+/
      },
-     thoughts: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Thought'
-        }
-    ],
+     thoughts: [],
      friends: [
         {
             type: Schema.Types.ObjectId,
@@ -27,19 +21,19 @@
         }
     ],
     },
-    {
-    toJSON: {
-        virtuals: true,
-        getters: true
-        },
-    id: false
-    }
+//    {
+//    toJSON: {
+//        virtuals: true,
+//        getters: true
+//        },
+//    id: false
+//    }
 );
 
-UserSchema.virtual('friendCount').get(function(){
-    return this.friends.reduce((total, friends) => total + friends.length + 1, 0);
-});
+//UserSchema.virtual('friendCount').get(function(){
+//    return this.friends.reduce((total, friends) => total + friends.length + 1, 0);
+//});
 
-const user = model('User', UserSchema);
+const User = model('User', UserSchema);
 
 module.exports = User;
