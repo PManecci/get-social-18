@@ -24,6 +24,10 @@ const userController = {
             path: 'thoughts',
             select: '-__v'
         })
+        .populate({
+            path: 'friends',
+            select: '-__v'
+        })
         .select('-__v')
         .then(dbUserData => {
             // If no user is found
@@ -80,10 +84,10 @@ const userController = {
         )
         .then(dbUserData => {
             if(!dbUserData) {
-            res.status(404).json({ message: 'No user found with this id!'});
-            return;
-        }
-        res.json(dbUserData);
+                res.status(404).json({ message: 'No user found with this id!'});
+                return;
+            }
+            res.json(dbUserData);
         })
         .catch(err => res.status(400).json(err));
     },
@@ -97,10 +101,10 @@ const userController = {
         )
         .then(dbUserData => {
             if(!dbUserData) {
-            res.status(404).json({ message: 'No user found with this id!'});
-            return;
+                res.status(404).json({ message: 'No user found with this id!'});
+                return;
             }
-        res.json(dbUserData);
+            res.json(dbUserData);
         })
         .catch(err => res.status(400).json(err));
     }
