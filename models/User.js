@@ -13,7 +13,12 @@
         unique: true,
         match: /.+\@.+\..+/
      },
-     thoughts: [],
+     thoughts: [
+         {
+             type: Schema.Types.ObjectId,
+             ref: 'Thought'
+         }
+     ],
      friends: [
         {
             type: Schema.Types.ObjectId,
@@ -21,18 +26,17 @@
         }
     ],
     },
-//    {
-//    toJSON: {
-//        virtuals: true,
-//        getters: true
-//        },
-//    id: false
-//    }
+    {
+    toJSON: {
+       virtuals: true,
+        },
+    id: false
+    }
 );
 
-//UserSchema.virtual('friendCount').get(function(){
-//    return this.friends.reduce((total, friends) => total + friends.length + 1, 0);
-//});
+UserSchema.virtual('friendCount').get(function(){
+    return this.friends.reduce((total, friends) => total + friends.length + 1, 0);
+});
 
 const User = model('User', UserSchema);
 
